@@ -17,7 +17,7 @@ await resend.emails.send({
 
 from:"onboarding@resend.dev",
 
-to:"sening_resend_account_emailing@gmail.com",
+to:"ibrohimdev2014@gmail.com",
 
 subject:"Password reset code",
 
