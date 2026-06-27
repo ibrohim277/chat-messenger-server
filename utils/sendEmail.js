@@ -1,33 +1,35 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 
 const transporter = nodemailer.createTransport({
 
-  service:"gmail",
+service:"gmail",
 
-  auth:{
-    user:"farxodsadullayev926@gmail.com",
-    pass:"ftjt itpa gbih onrw"
-  }
+auth:{
+ user:process.env.EMAIL_USER,
+ pass:process.env.EMAIL_PASS
+}
 
 });
 
 
-
-export const sendCode = async(email, code)=>{
-
-
-  await transporter.sendMail({
-
-    from:`farxodsadullayev926@gmail.com`,
-
-    to:email,
-
-    subject:"Password reset code",
-
-    text:`Your code: ${code}`
+export const sendCode = async(email,code)=>{
 
 
-  });
+await transporter.sendMail({
+
+from:process.env.EMAIL_USER,
+
+to:email,
+
+subject:"Password reset code",
+
+text:`Your code: ${code}`
+
+});
 
 
 };
