@@ -1,40 +1,29 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 
-const transporter = nodemailer.createTransport({
+const resend = new Resend(
+  process.env.RESEND_API_KEY
+);
 
-  host: "smtp.gmail.com",
 
-  port: 465,
 
-  secure: true,
+export const sendCode = async(email, code)=>{
 
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+
+await resend.emails.send({
+
+from:"onboarding@resend.dev",
+
+to:email,
+
+subject:"Password reset code",
+
+text:`Your code: ${code}`
 
 });
-
-
-
-export const sendCode = async (email, code) => {
-
-
-  await transporter.sendMail({
-
-    from: process.env.EMAIL_USER,
-
-    to: email,
-
-    subject: "Password reset code",
-
-    text: `Your code: ${code}`
-
-  });
 
 
 };
